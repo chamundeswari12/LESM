@@ -2,6 +2,8 @@ package ls.lesm.restcontroller;
 
 import java.security.Principal;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +63,7 @@ public class AuthController {
 	private MasterEmployeeDetailsRepository masterEmployeeDetailsRepository;
 
 	@PostMapping("/login")
-	public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception{
+	public ResponseEntity<?> generateToken(@Valid @RequestBody JwtRequest jwtRequest) throws Exception{
 		LOG.info("Enterd into generateToken method");
 		try {
 

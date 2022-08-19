@@ -57,9 +57,10 @@ public class User implements UserDetails{
 	
 	
 	@NotBlank(message = "userName cannot be empty")
+	@NotNull(message="username shouldn't be null")
 	//@Column(name="userName", nullable=false, unique=true)
 	private String username;
-	
+	@NotBlank(message="Please enter password")
 	private String password;
 
 	private String email;

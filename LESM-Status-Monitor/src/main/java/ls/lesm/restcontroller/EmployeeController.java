@@ -471,7 +471,7 @@ public class EmployeeController {
 		attachment = attachmentService.getAttachment(i);
 		
 		return ResponseEntity.ok().contentType(MediaType.parseMediaType(attachment.getFileType()))
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + attachment.getFileName() + "\"")
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+"sai charan" + attachment.getFileName() + "\"")
 				.body(new ByteArrayResource(attachment.getContent()));
 	}
 

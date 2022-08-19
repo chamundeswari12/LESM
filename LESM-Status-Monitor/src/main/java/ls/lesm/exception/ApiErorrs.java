@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ApiErorrs {
 	
+	public ApiErorrs(String errorMessage) {
+		super();
+		this.errorMessage = errorMessage;
+	}
 	private Date timeStamp;
 	private String errorMessage;
 	private String errorCode;

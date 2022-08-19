@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ls.lesm.exception.UserNameNotFoundException;
 import ls.lesm.model.MasterEmployeeDetails;
 import ls.lesm.model.Role;
 import ls.lesm.model.User;
@@ -64,8 +66,18 @@ public class AdminController {
 	public User createUser( @RequestBody @Valid User user,
 			               @RequestParam String roleName) throws Exception {
 		LOG.info("Enterd into createUser Method");
+//		if(user.getUsername()==null)
+//		{
+//			throw new UserNameNotFoundException("username must be there","501");
+//		}
 
 		MasterEmployeeDetails employee=this.masterEmployeeDetailsRepository.findByLancesoft(user.getUsername());
+		
+		if(employee==null)
+		{
+			throw new UserNameNotFoundException("Employee with this username doesn't exist");
+		}
+		else {
 		user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setUsername(user.getUsername().toUpperCase());
 		user.setEmail(employee.getEmail());
@@ -89,6 +101,7 @@ public class AdminController {
 		LOG.debug("Assigned Default role to user to USER");
 		userRoleSet.add(userRole);
 		return this.userService.createUser(user, userRoleSet);
+		}
 	}
 	
 	

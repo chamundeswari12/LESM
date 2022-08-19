@@ -32,8 +32,8 @@ public class Attachment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer attachment_Id;
-	private String fileName;
-	private String fileType;
+	private String fileName;//user stories
+	private String fileType;//.doc
 	@Lob
 	private byte[] Content;
 
